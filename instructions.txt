@@ -1,0 +1,56 @@
+router.get('/', (req, res) => {
+  // res.send('Hey! It works!')
+  //   res.send('it works')
+  //   const johan = { name: 'Wes', age: 100, cool: true }
+  //   // res.json(johan)
+  //   // res.json(req.query)
+  //   // res.send(req.query.name)
+  res.render('hello')
+})
+
+
+MVC pattern 
+-Model       --  queries, fetching data 
+-Controller  -- traffic // get data put it in template
+-View        -- templates
+- miidleware -- after request before response
+
+
+
+
+saving in database
+create a schema in model
+in controller use the schema
+route
+
+
+
+
+
+
+Saving data
+  //async await
+  // try {
+  //   const store = new Store(req.body)
+  //   await store.save()
+  //   console.log('It Saved')
+  // }
+  // catch(err)
+
+  // with a callback
+  // store.save(function (err, store) {
+  //   if (!err) {
+  //     console.log('It Saved')
+  //     res.redirect('/')
+  //   }
+  // })
+
+  //  with promise
+  // store
+  //   .save()
+  //   .then((store) => {
+  //     return store.find()
+  //   })
+  //   .catch((err) => {
+  //     throw Error(err)
+  //   })
