@@ -1,4 +1,6 @@
+const { excludedProperties } = require('juice')
 const mongoose = require('mongoose')
+const { response } = require('../app')
 // //imported in app.js
 const Store = mongoose.model('Store')
 
@@ -26,4 +28,32 @@ exports.getStores = async (req, res) => {
   const stores = await Store.find()
 
   res.render('stores', { title: ' Stores', stores: stores })
+}
+
+exports.editStore = async (req, res) => {
+  //1.find  store id
+  //or findbyid
+  const store = await Store.findOne({ _id: req.params.id })
+
+  //confirm is owner of 🏪
+
+  //render store
+
+  res.render('editStore', { title: `Edit ${store.name}`, store: store })
+}
+exports.updateStore = async (req, res) => {
+  //findOneAndUpdate method in mongo . takes 3 params: query data options
+  const store = await Store.findOneAndUpdate({ _id: req.params.id }, req.body, {
+    new: true, // return new store instead of the old one
+    runValidators: true, //validates the required validators
+  }).exec()
+
+  req.flash(
+    'success',
+    `Successfully updated <strong> ${store.name}</strong>. <a href="/stores/${store.slug}">View Store </a> `,
+  )
+
+  res.redirect(`/stores/${store._id}/edit`)
+  //find 🏪
+  //redirect to store and say it work
 }
