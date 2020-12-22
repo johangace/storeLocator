@@ -96,14 +96,10 @@ exports.updateStore = async (req, res) => {
 
 exports.getStoreBySlug = async (req, res, next) => {
   const store = await Store.findOne({ slug: req.params.slug })
-
-  if (!store) {
-    return next()
-  }
+  if (!store) return next()
   res.render('store', { store, title: store.name })
 }
 
-//getTagsList : custom made function in model for querry
 exports.getStoresByTag = async (req, res) => {
   const tag = req.params.tag
   const tagQuery = tag || { $exists: true, $ne: [] }

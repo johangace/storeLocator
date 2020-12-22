@@ -49,13 +49,11 @@ storeSchema.pre('save', async function (next) {
   if (storesWithSlug.length) {
     this.slug = `${this.slug}-${storesWithSlug.length + 1}`
   }
-
   next()
   // TODO make more resiliant so slugs are unique
 })
 
 storeSchema.statics.getTagsList = function () {
-  //methods in mongodb operators aggregate $unwind
   return this.aggregate([
     { $unwind: '$tags' },
     { $group: { _id: '$tags', count: { $sum: 1 } } },
