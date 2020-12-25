@@ -54,3 +54,30 @@ Saving data
   //   .catch((err) => {
   //     throw Error(err)
   //   })
+
+
+
+  //passport: 
+
+  - Plugin user model \
+    userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
+    userSchema.plugin(mongodbErrorHandler)
+
+  - Create a file for passport.js
+
+     passport.use(User.createStrategy())
+
+     passport.serializeUser(User.serializeUser())
+
+     passport.deserializeUser(User.deserializeUser())
+  
+  - router.get('/register', userController.registerForm)
+router.post(
+  '/register',
+  userController.validateRegister,
+  userController.register,
+  authController.login,
+)
+
+
+

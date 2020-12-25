@@ -23,7 +23,7 @@ mongoose.connection.on('error', (err) => {
 //import models
 //mongodb only imports once
 require('./models/Store')
-
+require('./models/User')
 // Start our app!
 const app = require('./app')
 app.set('port', process.env.PORT || 7777)

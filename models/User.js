@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 mongoose.Promise = global.Promise
+//for hashing
 const md5 = require('md5')
 const validator = require('validator')
 const mongodbErrorHandler = require('mongoose-mongodb-errors')
@@ -23,6 +24,15 @@ const userSchema = new Schema({
     required: 'Please supply a name',
     trim: true,
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
+})
+
+//avatar cool practice
+userSchema.virtual('gravatar').get(function () {
+  // hashed to not expose email
+  const hash = md5(this.email)
+  return `https://gravatar.com/avatar/${hash}?s=200`
 })
 
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
