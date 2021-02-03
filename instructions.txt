@@ -72,12 +72,14 @@ Saving data
      passport.deserializeUser(User.deserializeUser())
   
   - router.get('/register', userController.registerForm)
-router.post(
-  '/register',
-  userController.validateRegister,
-  userController.register,
-  authController.login,
-)
+    router.post(
+      '/register',
+      userController.validateRegister,
+      userController.register,
+      authController.login,
+    )
+
+  -
 
 
 
